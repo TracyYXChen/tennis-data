@@ -21,12 +21,11 @@ outMatchPath = os.path.join(PROCESSED_DIR, PROCESSED_MATCHES)
 firstMatchPath = os.path.join(PROCESSED_DIR, FIRST_YEAR_MATCHES)
 
 
-def processFullList():
-    selectedColumns = ['pid', 'birthday', 'age_year', 'age_day', 'ioc', 'first_name', 'last_name', 'pro_year', 'height', 'hand', 'backhand', 
-    'rank_single_ch', 'rank_single_ch_date', 'prize_career', 'residence']
-    OPEN_ERA = 1968
+def processFullList(cutoff=1993):
+    selectedColumns = ['pid', 'birthday', 'age_year', 'age_day', 'ioc', 'first_name', 'last_name', 'pro_year', 'height', 'hand', 
+    'rank_single_ch', 'rank_single_ch_date']
     rawDf = pd.read_csv(rawListPath, sep=',')[selectedColumns]
-    processedDf = rawDf[rawDf['pro_year'] >= OPEN_ERA]
+    processedDf = rawDf[rawDf['pro_year'] >= cutoff]
     processedDf.to_csv(outListPath, index=False)
 
 
@@ -53,7 +52,7 @@ def proYearMatches():
 
 
 if __name__ == "__main__":
-    print("processed files")
-    #processFullList()
-    #processMatches()
+    print("processed files...")
+    processFullList()
+    processMatches()
     #proYearMatches()
