@@ -3,7 +3,7 @@ import os
 
 RAW_DIR = 'raw'
 RAW_MATCHES = 'all_matches.csv'
-RAW_LIST = 'fulllist.csv'
+RAW_LIST = 'top2000info.csv'
 PROCESSED_DIR = 'processed'
 
 if not os.path.exists(RAW_DIR):
@@ -25,8 +25,8 @@ def processFullList(cutoff=1993):
     selectedColumns = ['pid', 'birthday', 'age_year', 'age_day', 'ioc', 'first_name', 'last_name', 'pro_year', 'height', 'hand', 
     'rank_single_ch', 'rank_single_ch_date']
     rawDf = pd.read_csv(rawListPath, sep=',')[selectedColumns]
-    processedDf = rawDf[rawDf['pro_year'] >= cutoff]
-    processedDf.to_csv(outListPath, index=False)
+    #processedDf = rawDf[rawDf['pro_year'] >= cutoff]
+    rawDf.to_csv(outListPath, index=False)
 
 
 def processMatches():
