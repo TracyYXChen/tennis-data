@@ -15,12 +15,21 @@ def decode_mht_file(mht_file_path):
     decoded_html = quopri.decodestring(html_part).decode(encode)
     return decoded_html
 
-# replace with your .mht file path
+
 mht_file_path = 'raw/Tennis Abstract_ Qinwen Zheng WTA Match Results, Splits, and Analysis.mht'
 decoded_html = decode_mht_file(mht_file_path)
 
+#soup = BeautifulSoup(decoded_html, 'html.parser')
+#table = soup.find('table', {'id': 'matches'})
+#df = pd.read_html(str(table))[0]
+#df.to_csv(f'processed/zheng_career_matches.csv', index=False)
+
+mht_file_path = 'raw/allPlayers.mht'
+decoded_html = decode_mht_file(mht_file_path)
+print(decoded_html)
+
 soup = BeautifulSoup(decoded_html, 'html.parser')
-table = soup.find('table', {'id': 'matches'})
+table = soup.find('table', {'id': 'maintable'})
 df = pd.read_html(str(table))[0]
-df.to_csv(f'processed/zheng_career_matches.csv', index=False)
+df.to_csv(f'processed/allPlayerStats.csv', index=False)
 
